@@ -1,5 +1,5 @@
 {
-  "name": "lit-htm",
+  "name": "@zoxon/lit-htm",
   "version": "1.0.0",
   "description": "",
   "exports": "./dist/index.js",
