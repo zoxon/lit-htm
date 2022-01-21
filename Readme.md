@@ -28,6 +28,48 @@ await transform({
 });
 ```
 
-## Example
-
 See [example folder](./example)
+
+## getStaticPaths
+
+If a page has Dynamic Routes and uses getStaticProps, it needs to define a list of paths to be statically generated.
+
+When you export a function called `getStaticPaths` from a page that uses dynamic routes, page will render all the paths specified by `getStaticPaths`
+
+```js
+export async function getStaticPaths() {
+  // Call an external API endpoint to get posts
+  // using `node-fetch` package
+  const response = await fetch(`https://jsonplaceholder.typicode.com/posts/`);
+  const posts = await response.json();
+
+  // You should always return array, each element in this array will be passed to the `getStaticProps` and `props`
+  const paths = posts.map((post) => ({ id: post.id }));
+
+  return {
+    paths,
+  };
+}
+```
+
+## getStaticProps
+
+If you export a function called `getStaticProps` from a page, it will rendered this page using props returned by getStaticProps
+
+```js
+export async function getStaticProps({ id }) {
+  // Call an external API endpoint to get post by ID
+  // using `node-fetch` package
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/posts/${id}`
+  );
+  const post = await response.json();
+
+  // `post` will be merged with props and will be available at component in `props.post`
+  return {
+    props: {
+      post,
+    },
+  };
+}
+```

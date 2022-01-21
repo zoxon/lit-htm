@@ -1,4 +1,4 @@
-import htm from 'htm'
-import vhtml from 'vhtml'
+import htm from "htm";
+import vhtml from "vhtml";
 
-export const html = htm.bind(vhtml)
+export default htm.bind(vhtml);
